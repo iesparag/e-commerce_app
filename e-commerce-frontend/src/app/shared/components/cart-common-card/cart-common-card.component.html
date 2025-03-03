@@ -1,0 +1,36 @@
+<div class="cart-container">
+  <div class="cart-card">
+    <div class="cart-item">
+      <img
+        [src]="cartItem.product.images[0]"
+        alt="{{ cartItem.product.name }}"
+      />
+      <div class="cart-card-details">
+        <h4>{{ cartItem.product.name }}</h4>
+        <p>${{ cartItem.product.price }}</p>
+        <div class="cart-card-actions">
+          <button (click)="decreaseQuantity()">-</button>
+          <span>{{ cartItem.quantity }}</span>
+          <button (click)="increaseQuantity()">+</button>
+        </div>
+      </div>
+      <div class="cart-right-side">
+       
+          <span class="red-text-button">
+            {{ cartItem.quantity * cartItem.product.price | currency : "INR" }}
+          </span>
+          
+          <button class="common_Buttons">
+            <mat-icon  (click)="deleteItemFromCart()"
+              >delete</mat-icon
+            >
+          </button>
+          <button class="common_Buttons" (click)="moveToFavFromCart()">
+          Move to Favourite
+        </button>
+          <button class="common_Buttons" (click)="moveToSaveForLater()">Save For Later</button>
+       
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div class="search-results">
+    <h2>Search Results for "{{ searchQuery }}"</h2>
+    <div *ngIf="searchResults$ | async as searchResults">
+        <div *ngIf="searchResults.length > 0">
+            <div class="product-list">
+                <ng-container
+                    *ngFor="let product of searchResults$ | async"
+                >
+                    <app-product-common-card
+                        [product]="product"
+                    ></app-product-common-card>
+                </ng-container>
+            </div>
+        </div>
+        <div *ngIf="searchResults.length === 0">
+            <p>No results found.</p>
+        </div>
+    </div>
+</div>

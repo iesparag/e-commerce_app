@@ -1,0 +1,5 @@
+<app-carousel [images]="images"></app-carousel>
+<app-category-common-card
+  [categories]="(categories$ | async) || []"
+  [columns]="6">
+</app-category-common-card>

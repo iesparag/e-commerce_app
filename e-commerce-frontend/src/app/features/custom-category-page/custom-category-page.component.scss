@@ -1,0 +1,40 @@
+.title {
+    font-size: 24px;
+    font-weight: bold;
+    text-align: left;
+    
+    padding: 20px;
+}
+
+.subcategory-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 16px;
+    padding: 20px;
+}
+
+.subcategory-card {
+    background: white;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.subcategory-image {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.subcategory-name {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.subcategory-description {
+    font-size: 14px;
+    color: gray;
+}

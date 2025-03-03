@@ -1,0 +1,5 @@
+<div class="product-list">
+    <ng-container *ngFor="let product of productWithWishlist$ | async">
+      <app-product-common-card  [product]="product"></app-product-common-card>
+    </ng-container>
+</div>

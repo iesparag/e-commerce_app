@@ -1,0 +1,7 @@
+<div class="card-container" [ngStyle]="{ 'grid-template-columns': 'repeat(' + columns + ', 1fr)' }">
+    <div  class="card" *ngFor="let category of categories" (click)="onCategoryClick(category)">
+      <img [src]="category.categoryImageimageUrl" alt="{{ category.name }}" />
+      <h3>{{ category.name }}</h3>
+    </div>
+  </div>
+  

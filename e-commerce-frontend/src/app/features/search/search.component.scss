@@ -1,0 +1,17 @@
+.search-results{
+      padding: 20px;
+      h2{
+                margin-bottom: 20px;
+      }   
+         
+}
+.product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+  padding: 20px;
+    app-product-common-card {
+      flex: 1 1 calc(20% - 16px);
+      max-width: calc(20% - 16px);
+    }
+  }

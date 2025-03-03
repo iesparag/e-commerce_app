@@ -1,0 +1,8 @@
+<p class="title">Subcategories for {{ categoryName }}</p>
+<div class="subcategory-container">
+    <div (click)="NavigateToProducts(subCategory)"  *ngFor="let subCategory of subCategoryData" class="subcategory-card">
+        <img [src]="subCategory.subCategoryImage" alt="{{ subCategory.name }}" class="subcategory-image" />
+        <p class="subcategory-name">{{ subCategory.name }}</p>
+        <p class="subcategory-description">{{ subCategory.description }}</p>
+    </div>
+</div>

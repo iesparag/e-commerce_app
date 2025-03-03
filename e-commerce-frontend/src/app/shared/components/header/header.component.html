@@ -1,0 +1,65 @@
+<nav class="navbar">
+    <div class="navbar-brand">
+        <a routerLink="/">MyStore</a>
+    </div>
+    <div class="navbar-links">
+        <ul>
+            <li><a routerLink="/home/Mobiles">Mobiles</a></li>
+            <li><a routerLink="/home/women">Women</a></li>
+            <li><a routerLink="/home/kids">Kids</a></li>
+            <li><a routerLink="/home/home-living">Home & Living</a></li>
+            <li><a routerLink="/home/beauty">Beauty</a></li>
+        </ul>
+    </div>
+    <div class="navbar-search">
+        <input
+            type="text"
+            placeholder="Search for products, brands, and more"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchChange()"
+        />
+        <div class="search-dropdown" *ngIf="searchResults.length > 0">
+        <ul>
+            <li *ngFor="let result of searchResults" (click)="clearSearch()">
+                {{ result }}
+            </li>
+        </ul>
+    </div>
+    </div>
+    <div class="navbar-icons">
+        <!-- Conditional Rendering for Auth -->
+        <a routerLink="/wishlist" class="favorites">
+            <mat-icon class="favorite-icon">favorite</mat-icon>
+            <span class="favorites-count">{{ wishlistItemCount }}</span>
+        </a>
+        <a routerLink="/cart" class="cart">
+            <mat-icon>shopping_cart</mat-icon>
+            <span class="cart-count">{{ cartItemCount }}</span>
+        </a>
+        <ng-container *ngIf="user$ | async as user">
+            <button mat-button [matMenuTriggerFor]="menu">
+                <img
+                    [src]="user.avatar || defaultAvatar"
+                    [alt]="user.firstName"
+                    style="
+                        width: 40px;
+                        height: 40px;
+                        border-radius: 50%;
+                        object-fit: cover;
+                    "
+                />
+            </button>
+            <mat-menu #menu="matMenu" class="matMenu">
+                <span mat-menu-item *ngIf="!user.avatar"
+                    >Hi, {{ user.firstName }}</span
+                >
+                <button mat-menu-item (click)="onOrder()">Orders</button>
+                <button mat-menu-item (click)="onLogout()">Logout</button>
+            </mat-menu>
+        </ng-container>
+
+        <ng-template #showLogin>
+            <a routerLink="/login" class="login">Login</a>
+        </ng-template>
+    </div>
+</nav>

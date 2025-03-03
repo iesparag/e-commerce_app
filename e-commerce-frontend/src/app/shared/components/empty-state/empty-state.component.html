@@ -1,0 +1,20 @@
+<div class="empty-state-container" *ngIf="image || heading || message || actionLink">
+  <!-- Empty state image (conditionally rendered) -->
+  <img
+    *ngIf="image"
+    [src]="image"
+    alt="Empty State"
+    class="empty-state-image"
+  />
+
+  <!-- Empty state heading (conditionally rendered) -->
+  <h3 *ngIf="heading" class="empty-state-heading">{{ heading }}</h3>
+
+  <!-- Empty state message (conditionally rendered) -->
+  <p *ngIf="message" class="empty-state-text">{{ message }}</p>
+
+  <!-- Action button (conditionally rendered) -->
+  <a *ngIf="actionLink && buttonText" [routerLink]="actionLink" class="action-btn">
+    {{ buttonText }}
+  </a>
+</div>

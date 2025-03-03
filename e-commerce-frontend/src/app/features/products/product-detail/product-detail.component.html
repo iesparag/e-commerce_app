@@ -1,0 +1,83 @@
+<div class="product-detail">
+    <button class="back-link" (click)="backToPreviousRoute()">
+        ← back to previous screen
+    </button>
+
+    <div class="product-content">
+        <div class="image-section">
+            <img
+                [src]="selectedImage"
+                alt="Product Image"
+                class="product-image"
+            />
+            <div class="thumbnail-gallery">
+                <img
+                    *ngFor="let image of projectObj?.images"
+                    [src]="image"
+                    [class.active]="selectedImage === image"
+                    alt="Thumbnail"
+                    class="thumbnail-image"
+                    (click)="changeImage(image)"
+                />
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <div class="info-section">
+            <span class="badge">HOTSALE</span>
+            <h1>{{ projectObj?.name }}</h1>
+
+            <!-- Category (if needed) -->
+            <!-- <p class="category">{{ projectObj?.categoryId }}</p> -->
+
+            <div class="rating">
+                <span>⭐ 4.9</span> <span>(2130 reviews)</span>
+            </div>
+
+            <h3>Description:</h3>
+            <ul>
+                <li *ngFor="let desc of projectObj?.description?.split('. ')">
+                    {{ desc }}
+                </li>
+            </ul>
+
+            <!-- Price Section with Discount -->
+
+            <div class="price">
+                <div class="discount-info">
+                    <span class="discount-percentage"
+                        >-{{ projectObj?.discount }}%</span
+                    >
+                </div>
+                <div class="price-info">
+                    <span class="original-price">₹{{ projectObj?.price }}</span>
+                    <span class="discounted-price"
+                        >₹{{ projectObj?.priceAfterDiscount }}</span
+                    >
+                </div>
+            </div>
+
+            <!-- Weight Section -->
+            <h4>Weight:</h4>
+            <!-- <p>{{ projectObj?.weight }} kg</p> -->
+
+            <!-- Size Selection -->
+            <h4>Size:</h4>
+            <div class="sizes">
+                <button
+                    *ngFor="let size of sizes"
+                    (click)="selectSize(size)"
+                    [class.active]="selectedSize === size"
+                >
+                    {{ size }}
+                </button>
+            </div>
+
+            <div class="actions">
+                <button class="add-to-cart-btn" (click)="addToCart()">
+                    ADD TO CART
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

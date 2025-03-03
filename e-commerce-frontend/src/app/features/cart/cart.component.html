@@ -1,0 +1,310 @@
+<div class="cart-page">
+    <!-- Left Section: Shopping Cart -->
+    <div *ngIf="userCartList$ | async as userCartList; else loadingOrEmptyCart">
+        <!-- Only show the cart section if the length of userCartList is greater than 0 -->
+        <div
+            class="cart-section"
+            *ngIf="userCartList.length > 0; else emptyCart"
+        >
+            <div class="cart-items">
+                <a routerLink="/home"><h3>Shopping Continue >></h3></a>
+                <p class="heading">Your Cart Items</p>
+                <p>
+                    You have
+                    <strong>{{ userCartList.length }}</strong> item(s) in your
+                    cart
+                </p>
+
+                <div class="cart-list">
+                    <ng-container *ngFor="let item of userCartList">
+                        <app-cart-common-card
+                            [cartItem]="item"
+                        ></app-cart-common-card>
+                    </ng-container>
+                </div>
+
+                <!-- Total Cart Amount -->
+                <div class="total_cart_amount">
+                    <h3>
+                        Total:
+                        {{
+                            totalAmount
+                                | currency
+                                    : "INR"
+                                    : "symbol"
+                                    : "1.0-0"
+                                    : "en-IN"
+                        }}
+                    </h3>
+                    <button class="checkout-btn" [disabled]="!selectedAddressId" (click)="checkout()">
+                        Proceed to
+                       checkout
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Section: Payment -->
+            <div class="cart-payment">
+                <div *ngIf="addressessList$ | async as addressessList">
+                    <!-- Toggle between address list and search based on showAddressList flag -->
+                    <div class="address-container" *ngIf="showAddressList; else addNewAddressTemplate">
+                        <!-- Existing Addresses: Show Radio Buttons -->
+                        
+                        <div *ngFor="let address of addressessList">
+                            <div class="address-option">
+                                <label>
+                                    <input
+                                        type="radio"
+                                        name="address"
+                                        [value]="address._id"
+                                        [(ngModel)]="selectedAddressId"
+                                        (change)="onAddressSelect(address)"
+                                        [checked]="
+                                            address._id === selectedAddressId
+                                        "
+                                    />
+                                    <div class="address-details">
+                                        <div class="address-line">
+                                            <strong>Floor/Block:</strong>
+                                            {{ address.floor }}
+                                        </div>
+                                        <div class="address-line">
+                                            <strong>Building:</strong>
+                                            {{ address.building }}
+                                        </div>
+                                        <div class="address-line">
+                                            <strong>City:</strong>
+                                            {{ address.city }}
+                                        </div>
+                                        <div class="address-line">
+                                            <strong>State:</strong>
+                                            {{ address.state }}
+                                        </div>
+                                        <div class="address-line">
+                                            <strong>Pincode:</strong>
+                                            {{ address.zip }}
+                                        </div>
+                                    </div>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Button to add a new address -->
+                        <button class="shop-now-btn" (click)="addNewAddress()">
+                            Add New Address
+                        </button>
+                    </div>
+
+                    <!-- Template for adding a new address if "Add New Address" clicked -->
+                    <ng-template #addNewAddressTemplate>
+                        <div>
+                            <label class="heading" for="addressInput"
+                                >Search your Address:</label
+                            >
+                            <div>
+                                <input
+                                    #addressInput
+                                    type="text"
+                                    id="addressInput"
+                                    [value]="formattedAddress"
+                                    placeholder="Search your address"
+                                    (input)="onAddressChange($event)"
+                                />
+                            </div>
+                            <a
+                                href="javascript:void(0)"
+                                (click)="useMyLocation()"
+                                >Use My Location</a
+                            >
+                        </div>
+
+                        <!-- If the address is not saved, show the form to add a new address -->
+                        <div
+                            *ngIf="!isAddressSaved"
+                            class="address-details-form"
+                        >
+                            <h4>Confirm Address Details:</h4>
+
+                            <!-- Address Form for New Address -->
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Floor/Block"
+                                    [(ngModel)]="addressDetails.floor"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.floor"
+                                    class="error-message"
+                                >
+                                    Please enter a floor number.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Building/Apartment"
+                                    [(ngModel)]="addressDetails.building"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.building"
+                                    class="error-message"
+                                >
+                                    Please enter building/apartment.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Street/Area"
+                                    [(ngModel)]="addressDetails.street"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.street"
+                                    class="error-message"
+                                >
+                                    Please enter street/area.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Locality"
+                                    [(ngModel)]="addressDetails.locality"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.locality"
+                                    class="error-message"
+                                >
+                                    Please enter locality.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="City"
+                                    [(ngModel)]="addressDetails.city"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.city"
+                                    class="error-message"
+                                >
+                                    Please enter city.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="State"
+                                    [(ngModel)]="addressDetails.state"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.state"
+                                    class="error-message"
+                                >
+                                    Please enter state.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Country"
+                                    [(ngModel)]="addressDetails.country"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.country"
+                                    class="error-message"
+                                >
+                                    Please enter country.
+                                </p>
+                            </div>
+
+                            <div>
+                                <input
+                                    type="text"
+                                    placeholder="Zip Code"
+                                    [(ngModel)]="addressDetails.zip"
+                                />
+                                <p
+                                    *ngIf="!addressDetails.zip"
+                                    class="error-message"
+                                >
+                                    Please enter zip code.
+                                </p>
+                            </div>
+
+                            <p *ngIf="isError" class="error-message">
+                                {{ errorMessage }}
+                            </p>
+
+                            <div>
+                                <label class="checkbox-div">
+                                    <input
+                                        type="checkbox"
+                                        [(ngModel)]="addressDetails.isDefault"
+                                    />
+                                    Make this my default address
+                                </label>
+                            </div>
+                            <div class="button-div">
+                                <button
+                                    class="save-address-button"
+                                    [disabled]="
+                                        !addressDetails.floor ||
+                                        !addressDetails.building ||
+                                        !addressDetails.street ||
+                                        !addressDetails.locality ||
+                                        !addressDetails.city ||
+                                        !addressDetails.state ||
+                                        !addressDetails.country ||
+                                        !addressDetails.zip
+                                    "
+                                    (click)="saveAddressDetails()"
+                                >
+                                    Save Address
+                                </button>
+                                <button
+                                    class="cancel-address-button"
+                                    (click)="cancelAddNewAddress()"
+                                >
+                                    Back to Address List
+                                </button>
+                            </div>
+                        </div>
+                    </ng-template>
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty Cart Template -->
+        <ng-template #emptyCart>
+            <app-empty-state
+                image="empty-cart.gif"
+                heading="Your cart is empty!"
+                message="Looks like you haven’t added anything to your cart yet."
+                actionLink="/home"
+                buttonText="Shop Now"
+            ></app-empty-state>
+        </ng-template>
+    </div>
+
+    <!-- save for later section start -->
+    <div class="Save-for-later">
+        <div>
+            <app-save-for-later></app-save-for-later>
+        </div>
+    </div>
+    <!-- save for later section End -->
+
+    <!-- Loading or Empty Cart Template -->
+    <ng-template #loadingOrEmptyCart>
+        <div class="loading-message">
+            <h3>Loading cart...</h3>
+        </div>
+    </ng-template>
+</div>

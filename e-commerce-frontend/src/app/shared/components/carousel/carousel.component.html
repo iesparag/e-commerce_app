@@ -1,0 +1,8 @@
+<swiper-container pagination="true" navigation="true" [slidesPerView]="1"  [spaceBetween]="30" loop="true" speed="500" autoplay="true">
+    <ng-container *ngFor="let image of images">
+      <swiper-slide>
+        <img [src]="image" alt="Carousel image" style="width: 100%; height: 500px;" />
+      </swiper-slide>
+    </ng-container>
+  </swiper-container>
+  
