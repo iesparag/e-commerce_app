@@ -15,7 +15,7 @@ export const AuthInterceptor: HttpInterceptorFn = (
   next: HttpHandlerFn
 ): Observable<HttpEvent<any>> => {
   const authService = inject(AuthService);
-  const accessToken = authService.getAccessToken(); // Get the current token
+  const accessToken = authService.getAccessToken();
 
   let authReq = req;
 
@@ -41,11 +41,11 @@ export const AuthInterceptor: HttpInterceptorFn = (
               return throwError(() => new Error('Invalid tokens received'));
             }
         
-            authService.saveTokens(newTokens.accessToken, newTokens.refreshToken);
+            authService.saveTokens(newTokens?.data?.accessToken, newTokens?.data?.refreshToken);
         
             const newRequest = req.clone({
               setHeaders: {
-                Authorization: `Bearer ${newTokens.accessToken}`,
+                Authorization: `Bearer ${newTokens?.data?.accessToken}`,
               },
             });
         
@@ -53,7 +53,7 @@ export const AuthInterceptor: HttpInterceptorFn = (
           }),
           catchError((err) => {
             console.error('❌ Refresh failed in interceptor:', err);
-            authService.clearTokens();
+            // authService.clearTokens();
             // authService.navigateToLogin();
             return throwError(() => err);
           })
