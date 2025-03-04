@@ -55,7 +55,9 @@
     .cart-payment {
         padding: 1rem;
         width: 30%;
-
+        .heading {
+            white-space: nowrap;
+        }
         .address-option {
             margin-bottom: 20px; /* Space between each address */
             padding: 10px;
@@ -206,4 +208,61 @@
 .error-message {
     font-size: 14px;
     color: red;
+}
+
+@media (max-width: 768px) {
+    .cart-page .cart-section {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .address-container {
+        width: 50vw;
+    }
+    .address-details-form h4 {
+        margin-bottom: 10px;
+    }
+    .button-div {
+        margin-top: 20px;
+    }
+    .shop-now-btn {
+        width: 100%;
+    }
+    .cart-page .cart-payment {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .form-fields-wrapper {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+@media (max-width: 426px) {
+    .cart-page .cart-section {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+    .address-container {
+        width: 50vw;
+    }
+    .address-details-form h4 {
+        margin-bottom: 10px;
+    }
+    .button-div {
+        margin-top: 20px;
+    }
+    .shop-now-btn {
+        width: 100%;
+    }
+    .cart-page .cart-payment {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .form-fields-wrapper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
 }

@@ -23,7 +23,6 @@
                     </ng-container>
                 </div>
 
-                <!-- Total Cart Amount -->
                 <div class="total_cart_amount">
                     <h3>
                         Total:
@@ -120,10 +119,11 @@
 
                         <!-- If the address is not saved, show the form to add a new address -->
                         <div
-                            *ngIf="!isAddressSaved"
-                            class="address-details-form"
+                        *ngIf="!isAddressSaved"
+                        class="address-details-form"
                         >
-                            <h4>Confirm Address Details:</h4>
+                        <h4>Confirm Address Details:</h4>
+                        <div class="form-fields-wrapper">
 
                             <!-- Address Form for New Address -->
                             <div>
@@ -241,6 +241,7 @@
                             <p *ngIf="isError" class="error-message">
                                 {{ errorMessage }}
                             </p>
+                          </div>
 
                             <div>
                                 <label class="checkbox-div">

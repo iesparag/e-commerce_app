@@ -7,6 +7,7 @@
   width: 500px;
   height: auto;
   margin-bottom: 1rem;
+  object-fit: cover;
 }
 
 .empty-state-heading {
@@ -23,12 +24,21 @@
 .action-btn {
   display: inline-block;
   padding: 0.5rem 1rem;
-  background-color: #007bff;
+  background-color: #ff3f6c;
   color: white;
   text-decoration: none;
   border-radius: 5px;
 }
 
 .action-btn:hover {
-  background-color: #0056b3;
+  background-color: #ff3f6c;
+}
+
+@media (max-width: 768px) {
+  .empty-state-image {
+    width: 300px;
+    height: auto;
+    margin-bottom: 1rem;
+    object-fit: cover;
+  }
 }
