@@ -2,10 +2,32 @@
     display: flex;
     flex-wrap: wrap;
     gap: 16px;
-  padding: 20px;
+    padding: 20px;
+    justify-content: start;
+
     app-product-common-card {
-      flex: 1 1 calc(20% - 16px);
-      max-width: calc(20% - 16px);
+        flex: 1 1 calc(20% - 16px);
+        max-width: calc(20% - 16px);
     }
-  }
-  
+}
+
+@media (max-width: 1024px) {
+    .product-list app-product-common-card {
+        flex: 1 1 calc(33.33% - 16px);
+        max-width: calc(33.33% - 16px);
+    }
+}
+
+@media (max-width: 768px) {
+    .product-list app-product-common-card {
+        flex: 1 1 calc(50% - 16px);
+        max-width: calc(50% - 16px);
+    }
+}
+
+@media (max-width: 426px) {
+    .product-list app-product-common-card {
+        flex: 1 1 calc(100% - 16px);
+        max-width: calc(100% - 16px);
+    }
+}

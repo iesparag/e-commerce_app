@@ -117,7 +117,7 @@
 }
 
 .favorite-icon {
-    color: black;
+    color: red;
     font-size: 24px;
 }
 
@@ -164,7 +164,69 @@
     object-fit: cover;
 }
 /* Responsive Design */
+// tab view
 @media (max-width: 768px) {
+    .navbar {
+        flex-wrap: wrap;
+        padding: 5px;
+    }
+    .hamburger {
+        display: block; /* Show hamburger menu */
+    }
+    .navbar-search {
+        margin: 10px 0;
+        max-width: 300px;
+
+        width: 100%;
+    }
+    .navbar-links ul {
+        gap: 10px;
+    }
+    .navbar-links ul li a {
+        font-size: 14px;
+    }
+    .navbar-icons {
+        gap: 25px;
+        margin: 5px;
+    }
+    .navbar-links {
+        display: none;
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background-color: white;
+        box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        flex-direction: column;
+        padding: 10px;
+        text-align: center;
+    }
+    /* Show navbar links when menu is toggled */
+    .navbar-links.mobile-menu {
+        display: inline-block;
+        text-align: left;
+    }
+    .navbar-links ul {
+        flex-direction: column;
+        padding: 0;
+    }
+    .navbar-links ul li {
+        padding: 10px 20px;
+    }
+    /* Show hamburger icon in mobile view */
+    .hamburger {
+        display: block;
+    }
+    .desktop-only {
+        display: none; /* Hide wishlist icon in navbar */
+    }
+    .mobileView {
+        display: block;
+    }
+}
+
+// mobile view
+@media (max-width: 426px) {
     .avatar_img {
         width: 30px;
         height: 30px;

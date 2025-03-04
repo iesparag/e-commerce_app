@@ -4,6 +4,7 @@ import {
   inject,
   Input,
   OnInit,
+  ViewEncapsulation,
 } from '@angular/core';
 import { Product } from '../../../features/products/state/product.state';
 import { CommonModule } from '@angular/common';
@@ -21,7 +22,6 @@ import { MatIconModule } from '@angular/material/icon';
 import {  addItemTotheWishlistStart, removeItemFromWishlistStart } from '../../../features/wishlist/state/wishlist.actions';
 import { Router } from '@angular/router';
 
-// Install Swiper modules
 SwiperCore.use([Navigation, Pagination]);
 
 @Component({

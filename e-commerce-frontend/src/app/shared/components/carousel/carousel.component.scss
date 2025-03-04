@@ -1,0 +1,29 @@
+swiper-container {
+    width: 100%;
+    height: auto;
+}
+
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+    color: #ff3f6c !important;
+}
+
+swiper-container::part(bullet-active) {
+    background-color: #ff3f6c !important;
+}
+
+@media (max-width: 768px) {
+    swiper-container {
+        height: 150px; /* Mobile ke liye height adjust */
+    }
+
+    swiper-container::part(button-prev),
+    swiper-container::part(button-next) {
+        font-size: 18px;
+    }
+
+    swiper-container::part(bullet-active) {
+        width: 8px;
+        height: 8px;
+    }
+}

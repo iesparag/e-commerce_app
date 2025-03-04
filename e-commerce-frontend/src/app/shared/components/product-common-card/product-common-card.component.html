@@ -1,68 +1,75 @@
-<div  class="product-card">
-  <!-- Product Gallery -->
-  <div class="product-gallery">
-    <swiper-container
-      style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff"
-      class="mySwiper"
-      thumbs-swiper=".mySwiper2"
-      loop="true"
-      space-between="10"
-      navigation="true"
-      pagination={true}
-    >
-      <!-- Render Images -->
-      <ng-container *ngFor="let image of product.images">
-        <swiper-slide>
-          <img [src]="image" class="imageClass" [alt]="product.name" />
-        </swiper-slide>
-      </ng-container>
+<div class="product-card">
+    <!-- Product Gallery -->
+    <div class="product-gallery">
+        <swiper-container
+            style="
+                --swiper-navigation-color: #fff;
+                --swiper-pagination-color: #fff;
+            "
+            class="mySwiper"
+            thumbs-swiper=".mySwiper2"
+            loop="true"
+            space-between="10"
+            navigation="true"
+            pagination="{true}"
+        >
+            <!-- Render Images -->
+            <ng-container *ngFor="let image of product.images">
+                <swiper-slide>
+                    <img
+                        [src]="image"
+                        class="imageClass"
+                        [alt]="product.name"
+                    />
+                </swiper-slide>
+            </ng-container>
 
-      <!-- Render Videos -->
-      <ng-template swiperSlide *ngFor="let video of product.videos">
-        <video controls>
-          <source [src]="video" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      </ng-template>
-    </swiper-container>
-  </div>
-
-  <!-- Product Details -->
-  <div class="product-details">
-    <h3>{{ product.name }}</h3>
-    <p>{{ product.description }}</p>
-
-    <div class="price-section">
-      <span class="mrp" [class.discounted]="product.discount"
-        >₹{{ product.MRP }}</span
-      >
-      <span *ngIf="product.discount" class="discounted-price">
-        ₹{{ product.MRP - (product.MRP * product.discount) / 100 }}
-      </span>
-      <span *ngIf="product.discount" class="discount-percent">
-        ({{ product.discount }}% OFF)
-      </span>
+            <!-- Render Videos -->
+            <ng-template swiperSlide *ngFor="let video of product.videos">
+                <video controls>
+                    <source [src]="video" type="video/mp4" />
+                    Your browser does not support the video tag.
+                </video>
+            </ng-template>
+        </swiper-container>
     </div>
-    <p  (click)="goToProductDetail()">View Details</p>
-  </div>
 
-  <!-- Quantity Control -->
-  <div class="flex_bw">
-   
-    <!-- <div class="quantity-control">
+    <!-- Product Details -->
+    <div class="product-details">
+        <h3>{{ product.name }}</h3>
+        <p>{{ product.description }}</p>
+        <div class="price-view-wrapper">
+            <div class="price-section">
+                <span class="mrp" [class.discounted]="product.discount"
+                    >₹{{ product.MRP }}</span
+                >
+                <span *ngIf="product.discount" class="discounted-price">
+                    ₹{{ product.MRP - (product.MRP * product.discount) / 100 }}
+                </span>
+                <span *ngIf="product.discount" class="discount-percent">
+                    ({{ product.discount }}% OFF)
+                </span>
+            </div>
+         <mat-icon  (click)="goToProductDetail()">north_east</mat-icon>
+        </div>
+    </div>
+
+    <!-- Quantity Control -->
+    <div class="flex_bw">
+        <!-- <div class="quantity-control">
       <button (click)="decreaseQuantity()">-</button>
       <span>{{ quantity }}</span>
       <button (click)="increaseQuantity()">+</button>
     </div> -->
-  </div>
+    </div>
 
-  <!-- Action Buttons -->
-  <div class="actions flex_bw">
-    <button class="likeBtn" (click)="toggleFavorite()">
-      <mat-icon *ngIf="product.isFavorite" class="red">favorite</mat-icon>
-      <mat-icon *ngIf="!product.isFavorite">favorite_border</mat-icon>
-    </button>
-    <button (click)="addToCart()">Add to Cart</button>
-    <!-- <button (click)="buyNow()">Buy Now</button> -->
-  </div>
+    <!-- Action Buttons -->
+    <div class="actions flex_bw">
+        <button class="likeBtn" (click)="toggleFavorite()">
+            <mat-icon *ngIf="product.isFavorite" class="red">favorite</mat-icon>
+            <mat-icon *ngIf="!product.isFavorite">favorite_border</mat-icon>
+        </button>
+        <button (click)="addToCart()">Add to Cart</button>
+        <!-- <button (click)="buyNow()">Buy Now</button> -->
+    </div>
 </div>

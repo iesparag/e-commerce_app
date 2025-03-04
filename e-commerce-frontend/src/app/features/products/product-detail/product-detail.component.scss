@@ -89,7 +89,7 @@
 }
 
 .sizes button.active {
-    background-color: #007bff;
+    background-color: #FF3F6C;
     color: white;
 }
 
@@ -160,4 +160,20 @@
     font-size: 1.5em;
     color: #ff5733;
     font-weight: bold;
+}
+
+
+@media (max-width:768px){
+    .product-content{
+        display: block;
+        
+    }
+
+    .image-section{
+        margin-bottom: 20px;
+    }
+
+    .back-link{
+        display: none;
+    }
 }

@@ -35,13 +35,13 @@
 
   @media (max-width: 768px) {
     .card-container {
-      grid-template-columns: repeat(2, 1fr); /* 2 cards in smaller screens */
+      grid-template-columns: repeat(2, 1fr) !important; /* 2 cards in smaller screens */
     }
   }
   
-  @media (max-width: 480px) {
+  @media (max-width: 480px) { 
     .card-container {
-      grid-template-columns: repeat(1, 1fr); /* 1 card in mobile screens */
+      grid-template-columns: repeat(1, 1fr) !important; /* 1 card in mobile screens */
     }
   }
   

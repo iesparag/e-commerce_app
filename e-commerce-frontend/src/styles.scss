@@ -47,3 +47,10 @@ button:disabled {
     text-decoration: none;
     margin-right: 10px;
   }
+
+  
+::ng-deep.swiper-button-next, 
+::ng-deep.swiper-button-prev{
+                color: red;
+                fill: red;
+}

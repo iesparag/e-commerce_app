@@ -21,7 +21,6 @@
                 overflow: hidden;
                 position: relative;
             }
-         
         }
     }
 
@@ -39,6 +38,20 @@
         object-fit: cover;
     }
 
+    swiper-container::part(button-prev),
+    swiper-container::part(button-next) {
+        color: #ff3f6c !important;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: #8c858542;
+        padding: 8px;
+    }
+
+    swiper-container::part(bullet-active) {
+        background-color: #ff3f6c !important;
+    }
+
     .product-details {
         min-height: 100px;
         height: 100px;
@@ -51,8 +64,15 @@
         p {
             margin: 8px 0;
             color: #555;
+            min-height: 40px;
         }
-
+        .price-view-wrapper{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            mat-icon{
+                color:#ff3f6c
+            }
         .price-section {
             display: flex;
             align-items: center;
@@ -76,6 +96,7 @@
             .discount-percent {
                 color: #38b000;
             }
+        }
         }
     }
 
@@ -108,11 +129,15 @@
         align-items: center;
         gap: 8px;
         button {
-            padding: 8px 16px;
+            padding: 12px 24px;
             border: none;
             cursor: pointer;
-            border-radius: 4px;
-            font-size: 1rem;
+            border-radius: 999px;
+            font-size: 18px;
+            // font-weight: 600;
+            background-color: #ff3f6c;
+            color: #fff;
+            transition: background 0.3s ease, transform 0.2s ease;
 
             &:nth-child(1) {
                 background-color: transparent;
@@ -126,7 +151,6 @@
                 color: white;
             }
 
-            font-size: 1.5rem;
             cursor: pointer;
         }
     }
@@ -134,3 +158,5 @@
 .likeBtn mat-icon {
     color: #e63946 !important;
 }
+
+
