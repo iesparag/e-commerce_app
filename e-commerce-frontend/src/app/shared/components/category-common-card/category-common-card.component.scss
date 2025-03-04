@@ -17,8 +17,8 @@
   .card img {
     max-width: 100%;
     width: 300px;
-    height: 300px;
-   
+    // height: 300px;
+   object-fit: cover;
     margin-bottom: 8px;
     border-radius: 4px;
   }

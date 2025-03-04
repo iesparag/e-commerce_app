@@ -15,10 +15,10 @@ import { ProductCommonCardComponent } from "../../shared/components/product-comm
     styleUrls: ['./search.component.scss'],
 })
 export class SearchComponent implements OnInit {
-    store = inject(Store);
     activatedRoute = inject(ActivatedRoute);
     router = inject(Router);
     searchQuery: string = '';
+    store = inject(Store);
     searchResults$: Observable<any[]> = this.store.select(selectSearchResults);
 
     private searchQuerySubject = new Subject<string>(); 

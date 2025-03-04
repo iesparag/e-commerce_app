@@ -18,13 +18,22 @@
             [(ngModel)]="searchQuery"
             (input)="onSearchChange()"
         />
-        <div class="search-dropdown" *ngIf="searchResults.length > 0">
-        <ul>
-            <li *ngFor="let result of searchResults" (click)="clearSearch()">
-                {{ result }}
-            </li>
-        </ul>
-    </div>
+        <div class="search-dropdown" *ngIf="searchResults$">
+            <ul>
+                <li
+                    *ngFor="let result of searchResults$ | async"
+                    (click)="clearSearch()"
+                >
+                    <div class="search-result" (click)="goToSearchResult(result._id)">
+                        <img width="60px" src="{{ result.images[0] }}" alt="" />
+                        <div>
+                            <div>{{ result.name }}</div>
+                            <div>{{ result.description }}</div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
     </div>
     <div class="navbar-icons">
         <!-- Conditional Rendering for Auth -->

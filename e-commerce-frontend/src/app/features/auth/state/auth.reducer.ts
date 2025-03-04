@@ -60,6 +60,11 @@ export const authReducer = createReducer(
     ...state,
     error,
   })),
+  on(AuthActions.refreshTokenSuccess, (state, { accessToken, refreshToken }) => ({
+    ...state,
+    accessToken,
+    refreshToken
+  })),
 
   // Add Address
  on(AuthActions.addAddressStart, (state) => ({

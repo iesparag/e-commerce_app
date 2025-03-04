@@ -54,6 +54,7 @@
     top: 100%;
     left: 0;
     width: 100%;
+    max-width: 400px;
     background: white;
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
@@ -68,13 +69,16 @@
     padding: 0;
 }
 
-.search-dropdown li {
+.search-dropdown .search-result {
     padding: 10px;
     cursor: pointer;
     border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.search-dropdown li:hover {
+.search-dropdown .search-result:hover {
     background: #f5f5f5;
 }
 
