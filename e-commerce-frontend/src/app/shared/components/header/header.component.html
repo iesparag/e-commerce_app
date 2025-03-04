@@ -1,14 +1,18 @@
 <nav class="navbar">
     <div class="navbar-brand">
-        <a routerLink="/">MyStore</a>
+        <a routerLink="/">
+            <span class="full-logo">MyStore</span>
+            <span class="short-logo">M</span>
+        </a>
     </div>
-    <div class="navbar-links">
+
+    <div class="navbar-links" [ngClass]="{ 'mobile-menu': isMobileMenuOpen }">
         <ul>
-            <li><a routerLink="/home/Mobiles">Mobiles</a></li>
-            <li><a routerLink="/home/women">Women</a></li>
-            <li><a routerLink="/home/kids">Kids</a></li>
-            <li><a routerLink="/home/home-living">Home & Living</a></li>
-            <li><a routerLink="/home/beauty">Beauty</a></li>
+            <li><a routerLink="/home/Mobiles" (click)="closeMobileMenu()">Mobiles</a></li>
+            <li><a routerLink="/home/women" (click)="closeMobileMenu()">Women</a></li>
+            <li><a routerLink="/home/kids" (click)="closeMobileMenu()">Kids</a></li>
+            <li><a routerLink="/home/home-living" (click)="closeMobileMenu()">Home & Living</a></li>
+            <li><a routerLink="/home/beauty" (click)="closeMobileMenu()">Beauty</a></li>
         </ul>
     </div>
     <div class="navbar-search">
@@ -24,7 +28,10 @@
                     *ngFor="let result of searchResults$ | async"
                     (click)="clearSearch()"
                 >
-                    <div class="search-result" (click)="goToSearchResult(result._id)">
+                    <div
+                        class="search-result"
+                        (click)="goToSearchResult(result._id)"
+                    >
                         <img width="60px" src="{{ result.images[0] }}" alt="" />
                         <div>
                             <div>{{ result.name }}</div>
@@ -37,7 +44,7 @@
     </div>
     <div class="navbar-icons">
         <!-- Conditional Rendering for Auth -->
-        <a routerLink="/wishlist" class="favorites">
+        <a routerLink="/wishlist" class="favorites desktop-only">
             <mat-icon class="favorite-icon">favorite</mat-icon>
             <span class="favorites-count">{{ wishlistItemCount }}</span>
         </a>
@@ -46,22 +53,22 @@
             <span class="cart-count">{{ cartItemCount }}</span>
         </a>
         <ng-container *ngIf="user$ | async as user">
-            <button mat-button [matMenuTriggerFor]="menu">
+            <div mat-button [matMenuTriggerFor]="menu">
                 <img
+                class="avatar_img"
                     [src]="user.avatar || defaultAvatar"
                     [alt]="user.firstName"
-                    style="
-                        width: 40px;
-                        height: 40px;
-                        border-radius: 50%;
-                        object-fit: cover;
-                    "
+                   
                 />
-            </button>
+            </div>
             <mat-menu #menu="matMenu" class="matMenu">
                 <span mat-menu-item *ngIf="!user.avatar"
                     >Hi, {{ user.firstName }}</span
                 >
+                <button class="mobileView" mat-menu-item routerLink="/wishlist">
+                    Wishlist
+                    <span class="favorites-count">{{ wishlistItemCount }}</span>
+                </button>
                 <button mat-menu-item (click)="onOrder()">Orders</button>
                 <button mat-menu-item (click)="onLogout()">Logout</button>
             </mat-menu>
@@ -71,4 +78,10 @@
             <a routerLink="/login" class="login">Login</a>
         </ng-template>
     </div>
+
+    <div class="hamburger" (click)="toggleMobileMenu()">
+        <mat-icon>menu</mat-icon>
+    </div>
+
+    <!-- //////////////// -->
 </nav>

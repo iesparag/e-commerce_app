@@ -36,6 +36,7 @@ import { selectSearchResults } from '../../../features/search/state/search.selec
     styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+    isMobileMenuOpen: boolean = false;
     store = inject(Store);
     router = inject(Router);
     user$: Observable<AuthState['user']>;
@@ -52,6 +53,14 @@ export class HeaderComponent implements OnInit {
         this.user$ = this.store.select(selectUser);
         this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
         console.log(this.searchResults$,"searchResults$")
+    }
+
+     toggleMobileMenu() {
+        this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    }
+
+    closeMobileMenu(){
+        this.isMobileMenuOpen = false
     }
 
     ngOnInit(): void {
