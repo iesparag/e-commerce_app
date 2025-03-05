@@ -28,7 +28,6 @@ export const AuthInterceptor: HttpInterceptorFn = (
 
   return next(authReq).pipe(
     catchError((error: HttpErrorResponse) => {
-      // 🔹 Agar error 401 hai, refresh token try karo
       if (error.status === 401) {
         return authService.refreshAccessToken().pipe(
           switchMap((newTokens) => {
@@ -41,7 +40,6 @@ export const AuthInterceptor: HttpInterceptorFn = (
               return throwError(() => new Error('Invalid tokens received'));
             }
         
-            authService.saveTokens(newTokens?.data?.accessToken, newTokens?.data?.refreshToken);
         
             const newRequest = req.clone({
               setHeaders: {

@@ -6,7 +6,7 @@
     <ng-container *ngIf="saveForLaterItems.length > 0; else noItems">
       <div class="wishlist-grid">
         <div class="wishlist-card" *ngFor="let item of saveForLaterItems">
-          <img [src]="item.images?.[0]" alt="Product Image" class="wishlist-image" />
+          <img [src]="item?.images?.[0]" alt="Product Image" class="wishlist-image" />
 
           <div class="wishlist-content">
             <h3 class="wishlist-title">{{ item.name }}</h3>

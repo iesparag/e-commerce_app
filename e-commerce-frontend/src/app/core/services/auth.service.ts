@@ -83,27 +83,7 @@ export class AuthService {
 
     // 🟢 **Refresh Access Token**
     refreshAccessToken(): Observable<any> {
-        if (this.isRefreshing) {
-            console.log(
-                '🔄 Refresh token already in progress, waiting for new token...'
-            );
-            return this.refreshTokenSubject.pipe(
-                filter((response) => response !== null),
-                take(1), // ✅ Ensure only the latest value is used
-                switchMap((response) => {
-                    this.saveTokens(
-                        response.data.accessToken,
-                        response.data.refreshToken
-                    );
-                    console.log('🔹 BehaviorSubject Response:', response);
-                    return of(response);
-                })
-            );
-        }
-
-        this.isRefreshing = true;
         const refreshToken = this.getRefreshToken();
-
         if (!refreshToken) {
             console.error('❌ No refresh token found, logging out...');
             this.isRefreshing = false;
@@ -140,12 +120,7 @@ export class AuthService {
                     this.saveTokens(
                         response.data.accessToken,
                         response.data.refreshToken
-                    );
-
-                    // ✅ Store entire response in BehaviorSubject
-                    this.refreshTokenSubject.next(response);
-
-                    // ✅ Dispatch action to update Redux state
+                    ); this.refreshTokenSubject.next(response);
                     this.store.dispatch(
                         refreshTokenSuccess({
                             accessToken: response.data.accessToken,

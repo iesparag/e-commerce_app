@@ -1,39 +1,35 @@
 /* Center the form in the middle */
 .login-container {
     display: flex;
-    justify-content: center;
+    justify-content: end;
     align-items: center;
     width: 100%;
-    height: 100%;
+    height: 100vh;
 
-    position: absolute;
-    background: url("https://nmgprod.s3.amazonaws.com/media/files/77/79/777972aa95a5599e872d727616925b9d/cover_image_1698325190.jpeg")
-        no-repeat center/cover;
+    background: url("../../../../../public/background.jpg") no-repeat left/cover;
 }
 
 /* Form Container Style */
 .form-container {
-    background: rgba(255, 255, 255, 0.6); /* Slight transparency */
+    // border: 2px solid #ff3f6c;
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 400px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);
+    width: 30%;
     max-width: 100%;
-    position: absolute;
-    right: 100px;
-    top: 100px;
-    background: rgb(199, 170, 25);
-    background: linear-gradient(
-        rgba(23, 235, 249, 1) 15% rgba(81, 63, 71, 1) 100%
-    );
+    margin-right: 10%;
+    background-color: #fff;
+
     h2 {
         text-align: center;
-        color: #000;
-        margin-bottom: 20px;
+        color: #ff3f6c;
+        margin-bottom: 50px;
+        font-size: 30px;
     }
     label {
-        font-weight: bold;
-        font-size: 20px;
+        font-weight: 500;
+        font-size: 24px;
+        color: #ff3f6c;
     }
     .form-links {
         display: flex;
@@ -41,8 +37,8 @@
         margin-top: 20px;
         letter-spacing: 1px;
         a {
-            color: #007bff;
-            text-decoration: none;
+            color: #ff3f6c;
+            text-decoration: underline;
             &:hover {
                 text-decoration: underline;
             }
@@ -54,20 +50,25 @@
 input {
     width: 100%;
     padding: 10px;
-    margin: 10px 0;
+    margin: 10px 0 20px;
     border-radius: 5px;
-    border: 1px solid #ccc;
+    border: 1px solid black;
+}
+input:focus-visible {
+    outline: 1px solid #ff3f6c !important ;
+    border: none;
 }
 
 /* Button Style */
 button {
     width: 100%;
     padding: 10px;
-    background-color: #2e060a;
+    background-color: #ff3f6c;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    margin-top: 20px;
 }
 
 button:disabled {
@@ -82,4 +83,25 @@ button:disabled {
     font-size: 0.9em;
 }
 
-
+@media (max-width: 768px) {
+    .login-container {
+        background: url("../../../../../public/background.jpg") no-repeat
+            left/cover;
+        background-position: 25%;
+    }
+    .form-container {
+        width: 40%;
+        margin-right: 5%;
+    }
+}
+@media (max-width: 425px) {
+    .login-container {
+        background: url("../../../../../public/background.jpg") no-repeat cover;
+        background-position-x: -400px;
+    }
+    .form-container {
+        width: 80%;
+        margin-right: 5%;
+        margin: auto;
+    }
+}

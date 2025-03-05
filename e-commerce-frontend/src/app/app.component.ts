@@ -20,7 +20,7 @@ export class AppComponent {
     constructor(private router: Router, private store: Store) {
 
         this.router.events.subscribe((res) => {
-            const noLayoutRoutes = ['/login', '/signup'];
+            const noLayoutRoutes = ['/login', '/sign-up','/forgot-password'];
             this.showLayout = !noLayoutRoutes.includes(this.router.url);
         });
         const accessToken = localStorage.getItem('accessToken');

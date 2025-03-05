@@ -64,11 +64,9 @@ export class ForgotPasswordComponent {
       this.errorMessage = 'Passwords do not match.';
       return;
     }
-
-    // Simulate OTP verification and password reset
     setTimeout(() => {
-      if (otp === '1234') { // Assume OTP is '1234'
-        this.router.navigate(['/login']); // Redirect to login page after successful reset
+      if (otp === '1234') {
+        this.router.navigate(['/login']); 
       } else {
         this.errorMessage = 'Invalid OTP. Please try again.';
       }
