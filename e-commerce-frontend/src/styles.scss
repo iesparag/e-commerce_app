@@ -40,6 +40,24 @@ button:disabled {
 }
 
 
+.btn-css {
+  display: inline-block;
+  background-color: #ff3f6c;
+  color: #fff;
+  // padding: 10px;
+  border-radius: 5px;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  white-space: nowrap;
+}
+
+.btn-css:hover {
+  background-color: #ff3f6c;
+  text-decoration: none;
+}
+
+
 
   .navbar-brand a {
     font-size: 30px;

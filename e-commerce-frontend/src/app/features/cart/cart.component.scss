@@ -191,17 +191,18 @@
 
 .shop-now-btn {
     display: inline-block;
-    background-color: #007bff;
+    background-color:#ff3f6c ;
     color: #fff;
     padding: 0.8rem 2rem;
     border-radius: 5px;
     font-size: 1rem;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    white-space: nowrap;
 }
 
 .shop-now-btn:hover {
-    background-color: #0056b3;
+    background-color: #ff3f6c;
     text-decoration: none;
 }
 
@@ -215,6 +216,7 @@
         display: flex;
         flex-direction: column-reverse;
     }
+
     .address-container {
         width: 50vw;
     }
@@ -237,12 +239,18 @@
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
+  
 }
 @media (max-width: 426px) {
     .cart-page .cart-section {
         display: flex;
         flex-direction: column-reverse;
     }
+
+    .cart-page .cart-items .total_cart_amount{
+        text-align: center;
+    }
+   
     .address-container {
         width: 50vw;
     }
@@ -265,4 +273,51 @@
         grid-template-columns: repeat(1, 1fr);
         gap: 20px;
     }
+ 
+}
+@media (max-width: 326px) {
+    .cart-page .cart-section {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .cart-page .cart-items .total_cart_amount{
+        text-align: center;
+    }
+   
+    .address-container {
+        width: 80vw;
+    }
+    .address-details-form h4 {
+        margin-bottom: 10px;
+    }
+    .button-div {
+        margin-top: 20px;
+    }
+    .shop-now-btn {
+        width: 100%;
+    }
+
+    .shop-now-btn {
+        display: inline-block;
+        background-color:#ff3f6c ;
+        color: #fff;
+        padding: 0.8rem 2rem;
+        border-radius: 5px;
+        font-size: 1rem;
+        text-decoration: none;
+        transition: background-color 0.3s ease;
+        white-space: nowrap;
+    }
+    .cart-page .cart-payment {
+        max-width: 90%;
+        width: 100%;
+    }
+
+    .form-fields-wrapper {
+        display: grid;
+        grid-template-columns: repeat(1, 1fr);
+        gap: 20px;
+    }
+ 
 }

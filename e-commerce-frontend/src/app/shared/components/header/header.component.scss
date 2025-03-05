@@ -163,6 +163,22 @@
     border-radius: 50%;
     object-fit: cover;
 }
+
+::ng-deep.mat-mdc-menu-panel{
+    background: #fff !important;
+}
+::ng-deep.mat-mdc-menu-content{
+    padding: 0px !important;
+}
+::ng-deep.mat-mdc-menu-item{
+    color: #ff3f6c !important;
+    border-bottom: 2px solid #ff3f6c ;
+}
+
+::ng-deep.mat-mdc-menu-content .mat-mdc-menu-item .mat-mdc-menu-item-text{
+   font-size: 18px !important;
+//    font-weight: 600;
+}
 /* Responsive Design */
 // tab view
 @media (max-width: 768px) {
