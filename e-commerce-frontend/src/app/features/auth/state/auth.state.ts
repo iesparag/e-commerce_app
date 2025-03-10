@@ -15,6 +15,7 @@
     success?: boolean;
     error?: string | null;
     isAuthenticated: boolean,
+    isValidForResetPassword?:boolean
   }
   
   export const initialState: AuthState = {
@@ -24,6 +25,7 @@
     success: false,
     error: null,
     isAuthenticated: false,
+    isValidForResetPassword:false,
   };
 
 

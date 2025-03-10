@@ -25,15 +25,57 @@ export const loginSuccess = createAction(
     }>()
 );
 
-export const updateUserFromLocalStorageSuccess = createAction(
-    '[Auth] Login update from local'
-);
-
 export const loginFailure = createAction(
     '[Auth] Login Failure',
     props<{ error: string }>()
 );
 
+export const ForgotEmailSendStart = createAction('[Auth] Forgot start',props<{email:string}>());
+
+export const ForgotEmailSendSuccess = createAction(
+  '[Auth] Forgot OTP Sent Successful',
+  props<{ response: ApiResponse<null> }>() 
+);
+export const ForgotEmailSendFails = createAction('[Auth] Forgot otp sent failed',props<{error: any}>())
+
+
+
+export const verifyTokenStart = createAction(
+  '[Auth] Verify Password Reset Token Start',
+  props<{ token: string }>()
+);
+
+export const verifyTokenSuccess = createAction(
+  '[Auth] Verify Password Reset Token Success',
+  props<{ message: string }>()
+);
+
+export const verifyTokenFailure = createAction(
+  '[Auth] Verify Password Reset Token Failure',
+  props<{ error: any }>()
+);
+
+export const resetPasswordStart = createAction(
+  '[Auth] Reset Password Start',
+  props<{ token: string; newPassword: string }>()
+);
+
+export const resetPasswordSuccess = createAction(
+  '[Auth] Reset Password Success',
+  props<{ message: string }>()
+);
+
+export const resetPasswordFailure = createAction(
+  '[Auth] Reset Password Failure',
+  props<{ error: any }>()
+);
+
+
+
+
+export const updateUserFromLocalStorageSuccess = createAction(
+    '[Auth] Login update from local'
+);
 export const logout = createAction('[Auth] Logout'); // Logout initiation
 export const logoutSuccess = createAction(
     '[Auth] Logout Success'
@@ -74,3 +116,6 @@ export const refreshTokenSuccess = createAction(
     '[Auth] Refresh Token Success',
     props<{ accessToken: string; refreshToken: string }>()
 );
+
+
+

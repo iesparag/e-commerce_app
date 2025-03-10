@@ -19,10 +19,12 @@ export class AppComponent {
 
     constructor(private router: Router, private store: Store) {
 
-        this.router.events.subscribe((res) => {
-            const noLayoutRoutes = ['/login', '/sign-up','/forgot-password'];
-            this.showLayout = !noLayoutRoutes.includes(this.router.url);
-        });
+       this.router.events.subscribe(() => {
+  const noLayoutRoutes = ['/login', '/sign-up', '/forgot-password'];
+  const currentRoute = this.router.url.split('?')[0];
+  this.showLayout = !noLayoutRoutes.some(route => currentRoute.startsWith(route));
+});
+
         const accessToken = localStorage.getItem('accessToken');
         if(accessToken){
             this.store.dispatch(updateUserFromLocalStorageSuccess());

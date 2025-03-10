@@ -120,7 +120,8 @@ export class AuthService {
                     this.saveTokens(
                         response.data.accessToken,
                         response.data.refreshToken
-                    ); this.refreshTokenSubject.next(response);
+                    );
+                    this.refreshTokenSubject.next(response);
                     this.store.dispatch(
                         refreshTokenSuccess({
                             accessToken: response.data.accessToken,
@@ -181,4 +182,23 @@ export class AuthService {
             `${this.apiUrl}/user-address`
         );
     }
+
+    // forgot password
+    forgotPassword(email: string): Observable<ApiResponse<null>> {
+        return this.http.post<ApiResponse<null>>(
+            `${this.apiUrl}/users/forgot-password`,
+            { email }
+        );
+    }
+
+    verifyToken(token: string): Observable<ApiResponse<null>> {
+        return this.http.post<ApiResponse<null>>(
+            `${this.apiUrl}/users/verify-token`,
+            { token }
+        );
+    }
+
+    resetPassword(token: string, newPassword: string): Observable<{ message: string }> {
+    return this.http.post<{ message: string }>(`${this.apiUrl}/users/reset-password`, { token, newPassword });
+  }
 }

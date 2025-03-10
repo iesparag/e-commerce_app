@@ -9,6 +9,12 @@ export const selectIsAuthenticated = createSelector(
     return state.isAuthenticated;
   }
 );
+export const selectIsValidForPasswordReset = createSelector(
+  selectAuthState,
+  (state) => {
+    return state.isValidForResetPassword;
+  }
+);
 
 
 export const selectAuthError = createSelector(

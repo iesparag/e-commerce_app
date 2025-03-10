@@ -41,7 +41,8 @@ export class HeaderComponent implements OnInit {
     router = inject(Router);
     user$: Observable<AuthState['user']>;
     isAuthenticated$: Observable<boolean>;
-    searchResults$: Observable<Product[]> = this.store.select(selectSearchResults);
+    searchResults$: Observable<Product[]> =
+        this.store.select(selectSearchResults);
     defaultAvatar =
         'https://avatars.githubusercontent.com/u/103980322?v=4&size=64';
     searchQuery: string = '';
@@ -52,28 +53,33 @@ export class HeaderComponent implements OnInit {
         // Subscribe to isAuthenticated selector
         this.user$ = this.store.select(selectUser);
         this.isAuthenticated$ = this.store.select(selectIsAuthenticated);
-        console.log(this.searchResults$,"searchResults$")
+        console.log(this.searchResults$, 'searchResults$');
+        console.log('this.isAuthenticated$: ', this.isAuthenticated$);
     }
 
-     toggleMobileMenu() {
+    toggleMobileMenu() {
         this.isMobileMenuOpen = !this.isMobileMenuOpen;
     }
 
-    closeMobileMenu(){
-        this.isMobileMenuOpen = false
+    closeMobileMenu() {
+        this.isMobileMenuOpen = false;
     }
 
     ngOnInit(): void {
-        this.store.dispatch(getUserCart());
-        this.store.dispatch(getUserWishlistStart());
+        // if()
+        this.isAuthenticated$.subscribe((AuthRes) => {
+            if (AuthRes) {
+                this.store.dispatch(getUserCart());
+                this.store.dispatch(getUserWishlistStart());
+            }
+        });
+
         this.store
             .select(selectCartTotalQuantity)
             .subscribe((res) => (this.cartItemCount = res));
         this.store
             .select(selectWishlistTotalQuantity)
             .subscribe((res) => (this.wishlistItemCount = res));
-
-            
     }
 
     onLogout(): void {
@@ -92,7 +98,7 @@ export class HeaderComponent implements OnInit {
     }
 
     goToSearchResult(id: string): void {
-       this.router.navigate([`/products/${id}`])
+        this.router.navigate([`/products/${id}`]);
     }
 
     clearSearch() {
