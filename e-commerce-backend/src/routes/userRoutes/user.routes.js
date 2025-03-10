@@ -5,13 +5,14 @@ const {
     logoutUser,
     registerUser,
     forgotPassword,
-    verifyOTP,
     refreshAccessToken,
     changeCurrentPassword,
     getCurrentUser,
     updateUserAvatar,
     updateUserCoverImage,
     updateAccountDetails,
+    verifyToken,
+    resetPassword,
 } = require("../../controllers/users/users.controller.js");
 const { upload } = require("../../middlewares/multer.middleware.js");
 const { verifyJWT } = require("../../middlewares/auth.middleware.js");
@@ -19,7 +20,8 @@ const { verifyJWT } = require("../../middlewares/auth.middleware.js");
 router.route("/register").post(registerUser);
 router.route("/login").post(loginUser);
 router.route("/forgot-password").post(forgotPassword);
-router.route("/verify-password").post(verifyOTP);
+router.route("/verify-token").post(verifyToken);
+router.route("/reset-password").post(resetPassword);
 
 // Secured routes
 router.route("/logout").post(verifyJWT, logoutUser);

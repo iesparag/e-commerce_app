@@ -565,7 +565,7 @@ const forgotPassword = asyncHandler(async (req, res) => {
         const token = jwt.sign({ email, otp }, process.env.hsbs_gmail_token_secret, { expiresIn: '10m' });
 
         // Send email with link containing token
-        const resetLink = `https://hbhs.vercel.app/verify-token?token=${token}`;
+        const resetLink = `http://localhost:4200/forgot-password?token=${token}&isEmailSubmitted=true`;
         await sendEmail({
             to: email,
             subject: 'Your Password Reset Link',
@@ -604,23 +604,57 @@ const forgotPassword = asyncHandler(async (req, res) => {
 // });
 
 // verify by link 
-const verifyOTP = asyncHandler(async (req, res) => {
+const verifyToken = asyncHandler(async (req, res) => {
     try {
-        const { token, newPassword } = req.body;
+        const { token } = req.body;
         if (!token) {
             return res.status(400).json(new ApiResponse(400, null, 'Token is required'));
         }
+
+        // Decode token
         const decoded = jwt.verify(token, process.env.hsbs_gmail_token_secret);
         console.log('decoded: ', decoded);
+
         const { email, otp } = decoded;
         const user = await User.findOne({ email });
 
         if (!user) {
             return res.status(404).json(new ApiResponse(404, null, 'User not found'));
         }
+
         if (user.forgotPasswordOTP !== otp || Date.now() > user.forgotPasswordOTPExpiry) {
             return res.status(400).json(new ApiResponse(400, null, 'Invalid or expired token'));
         }
+
+        res.status(200).json(new ApiResponse(200, null, 'Token is valid'));
+    } catch (error) {
+        console.error('Verify token error:', error);
+        res.status(500).json(new ApiResponse(500, null, 'Failed to verify token'));
+    }
+});
+
+
+const resetPassword = asyncHandler(async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+        if (!token || !newPassword) {
+            return res.status(400).json(new ApiResponse(400, null, 'Token and new password are required'));
+        }
+        const decoded = jwt.verify(token, process.env.hsbs_gmail_token_secret);
+        console.log('decoded: ', decoded);
+
+        const { email, otp } = decoded;
+        const user = await User.findOne({ email });
+
+        if (!user) {
+            return res.status(404).json(new ApiResponse(404, null, 'User not found'));
+        }
+
+        if (user.forgotPasswordOTP !== otp || Date.now() > user.forgotPasswordOTPExpiry) {
+            return res.status(400).json(new ApiResponse(400, null, 'Invalid or expired token'));
+        }
+
+        // Update password
         user.password = newPassword;
         user.forgotPasswordOTP = undefined;
         user.forgotPasswordOTPExpiry = undefined;
@@ -628,10 +662,12 @@ const verifyOTP = asyncHandler(async (req, res) => {
 
         res.status(200).json(new ApiResponse(200, null, 'Password has been reset successfully'));
     } catch (error) {
-        console.error('Verify token error:', error);
-        res.status(500).json(new ApiResponse(500, null, 'Failed to verify token'));
+        console.error('Reset password error:', error);
+        res.status(500).json(new ApiResponse(500, null, 'Failed to reset password'));
     }
 });
+
+
 module.exports = {
     registerUser,
     loginUser,
@@ -644,5 +680,6 @@ module.exports = {
     updateUserAvatar,
     updateUserCoverImage,
     forgotPassword,
-    verifyOTP
+    verifyToken,
+    resetPassword
 };
